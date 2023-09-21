@@ -1,0 +1,24 @@
+#Docker Compose file
+version: '3.1'
+
+services:
+  mongo:
+   image: mongo
+   restart: always
+   ports: 
+     - 27017:27017
+   environment: 
+      MONGO_INITDB_USERNAME: root
+      MONGO_INITDB_PASSWORD: root 
+  server:
+    build: server
+    restart: always
+    depends_on:
+      - mongo
+    ports: 
+      - 3030:3000
+  client:
+    build: client
+    ports: 
+      - 3000:3000
+ 
